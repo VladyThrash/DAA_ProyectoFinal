@@ -40,6 +40,12 @@ int extraer_txt();
 //Imprimir todos los registros obtenidos en el arreglo de structs.
 void imprimir_registros(int n);
 
+//Ordena en DESC los mensajes basados en prioridad.
+//A cada categoria: alta, media y baja, se le asigna un peso 0, 1 y 2 respectivamente. El peso se vuelve el criterio de conteo.
+//Complejidad: O(n + k), donde k es el número de categorias.
+void counting_sort(struct mensaje *arr, int size);
+int obtener_peso(char *prioridad);
+
 //Ordena en ASC los mensajes basado en las fechas  formato ISO: AAAA-MM-DD.
 //Aplica strcmp para obtener directamente el valor lexicografico.
 //Complejidad: O(n*log(n)). Requiere generar memoria de manera dinamica.
@@ -85,6 +91,7 @@ void message_analysis_menu(){
 
         switch(input){
             case 1:
+                counting_sort(mensajes, num_registros); //Ordens prioridad DESC.
                 printf("\n--- LISTADO EN PRIORIDAD ORDEN DESC ---\n");
                 imprimir_registros(num_registros);
                 break;
@@ -206,6 +213,51 @@ void imprimir_registros(int n){
 													mensajes[i].fecha, mensajes[i].clave_id, mensajes[i].texto_cifrado);
 	}
 	printf("-----------------------------------------------------------------------------------------------------------------------------\n");
+}
+
+void counting_sort(struct mensaje *arr, int size){
+    //Arreglo temporal para guardar el resultado ordenado.
+    struct mensaje *output = (struct mensaje*)malloc(sizeof(struct mensaje) * size);
+    int *count = (int*)calloc(3, sizeof(int)); //Arreglo de conteo.
+
+    //Contar mensajes de cada categoria.
+    for(int i = 0; i < size; i++){
+        int peso = obtener_peso(arr[i].prioridad);
+        count[peso]++;
+    }
+
+    //Calcular las posiciones acumuladas.
+    for(int i = 1; i < 3; i++){
+        count[i] += count[i - 1];
+    }
+
+    //Construir el arreglo de salida, recorremos el arreglo original de atrás hacia adelante.
+    for(int i = size - 1; i >= 0; i--){
+        int peso = obtener_peso(arr[i].prioridad);
+        int i_destino = count[peso] - 1; //Restamos 1 al conteo para obtener el índice.
+        copy(&output[i_destino], &arr[i]); //Copiamos en su indice destino.
+        count[peso]--; //decrementamos el conteo.
+    }
+
+    //Reescribir el arreglo original.
+    for(int i = 0; i < size; i++){
+        copy(&arr[i], &output[i]);
+    }
+    free(count);
+    free(output);
+}
+
+int obtener_peso(char *prioridad){
+    if(strcmp(prioridad, "baja") == 0){ //Prioridades invertidas para orden DESC.
+        return 2;
+    }
+    if(strcmp(prioridad, "media") == 0){
+        return 1;
+    }
+    if(strcmp(prioridad, "alta") == 0){
+        return 0;
+    }
+    return 0;
 }
 
 void merge_sort(struct mensaje *arr, int izq, int der){
