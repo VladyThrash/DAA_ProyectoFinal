@@ -35,7 +35,7 @@ El sistema está compuesto por 5 módulos principales enfocados en el análisis,
    * **Complejidad:** $O(T + q)$.
    * **Nota:** Muestra tanto las apariciones cifradas como las no cifradas.
 
-##Organización de archivos
+## Organización de archivos
 Source_Code/
 │
 ├── Message_Analysis.h        # Módulo 1: Ordenamiento y listado de mensajes
@@ -54,12 +54,12 @@ Source_Code/
     └── remitentes.txt        # Identificadores y nombres de los remitentes
 
 ## Instrucciones de compilación
-Para clonar el repositorio y compilar el proyecto en un entorno Linux utilizando GCC, ejecute los siguientes comandos en la terminal:
+Para clonar el repositorio y compilar el proyecto utilizando GCC, ejecute los siguientes comandos en la terminal:
 
 ```bash
 # Clonar el repositorio
-git clone <URL_DEL_REPOSITORIO>
-cd <NOMBRE_DE_LA_CARPETA>
+git clone https://github.com/VladyThrash/DAA_ProyectoFinal.git
+cd Source_Code
 
 # Compilar el archivo principal vinculando las librerías necesarias
 gcc Menu.c -o programa -lm
