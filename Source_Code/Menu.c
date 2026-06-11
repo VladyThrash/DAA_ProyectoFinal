@@ -11,17 +11,13 @@
 #include "Word_Inference.h"
 #include "Top_Words.h"
 #include "Word_Message_Analysis.h"
+#include "Leer_Numero.h" //Es solo una función de lectura segura de números enteros.
 
 //Contiene el switch case que dirije el flujo del programa al módulo especifico.
 void menu();
 
-//C es algo especial con las entradas, si estoy tratando de leer un entero y el usuario ingresa, por ejemplo, un caracter,
-//el programa podria tener un comportamiento erratico e inclusive cerrar la ejecución. Esta función asegura la entrada de datos.
-int leer_numero();
-
 //Contiene un arte ascii con el nombre el proyecto que se ejecuta al inicio del programa.
 void arte_ascii();
-
 
 int main(int argc, char const *argv[]){
     arte_ascii();
@@ -73,18 +69,6 @@ void menu(){
         } 
     }
     while(input);
-}
-
-int leer_numero(){
-    char buffer[100]; //Guarda la entrada del usuario.
-    int numero;
-
-    if(fgets(buffer, sizeof(buffer), stdin) != NULL) { //Lee la entrada completa de texto desde el teclado.
-        if (sscanf(buffer, "%d", &numero) == 1) { //Intenta sacar un valor entero de la cadena.
-            return numero; //Devuelve el número y sale del ciclo.
-        }
-    }
-    return -1; //Regresa un valor fuera de rango para continuar el ciclo.
 }
 
 void arte_ascii(){

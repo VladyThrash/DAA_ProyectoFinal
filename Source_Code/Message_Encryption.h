@@ -11,6 +11,7 @@ Módulo 2:
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
+#include "Leer_Numero.h" //Es solo una función de lectura segura de números enteros.
 
 //Toma el control del flujo del programa desde main.
 void message_encryption_menu();
