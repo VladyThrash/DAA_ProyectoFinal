@@ -1,13 +1,5 @@
-/*
-Módulo 4:
-    Obtener las 10 palabras presentes en mayor número de mensajes distintos (Minería y análisis):
-        *Archivos: mensajes_cifrados.txt  y palabras_frecuentes.txt
-        *Complejidad: O(T + w log w)
-        *Nota: Si una palabra aparece varias veces en el mismo mensaje, solo contará una vez para ese mensaje.
-*/
-
-#ifndef TOP_WORDS_H
-#define TOP_WORDS_H
+#include<stdio.h>
+#include <string.h>
 
 typedef struct {
     char palabra[50];
@@ -18,9 +10,8 @@ int buscar_palabra(char arreglo[][50], int total, char *palabra);
 void agregar_o_actualizar(EntradaPalabra global[], int *total_global, char *palabra);
 void intercambiar(EntradaPalabra *a, EntradaPalabra *b);
 void quicksort(EntradaPalabra arr[], int inicio, int fin);
-void top_words_menu(const char *ruta_archivo);
 
-void top_words_menu(const char *ruta_archivo)
+int main()
 {
     FILE *archivo;
     char linea[2048]; // buffer donde se guarda cada línea
@@ -30,11 +21,11 @@ void top_words_menu(const char *ruta_archivo)
     char palabras_mensaje[200][50];
     int total_mensaje = 0;
 
-    archivo = fopen(ruta_archivo, "r"); // "r" = solo lectura
+    archivo = fopen("Cryptonituv_DB/mensajes_cifrados.txt", "r"); // "r" = solo lectura
 
     if (archivo == NULL) {
         printf("No se pudo abrir el archivo\n");
-        return;
+        return 1;
     }
 
     fgets(linea, sizeof(linea), archivo); // salta el encabezado
@@ -69,7 +60,7 @@ void top_words_menu(const char *ruta_archivo)
         printf("%d. %s -> %d mensajes\n", i+1, global[i].palabra, global[i].conteo);
     }
     fclose(archivo);
-    return;
+    return 0;
 }
 
 int buscar_palabra(char arreglo[][50], int total, char *palabra) {
@@ -115,5 +106,3 @@ void quicksort(EntradaPalabra arr[], int inicio, int fin) {
         quicksort(arr, pivote + 1, fin);
     }
 }
-
-#endif

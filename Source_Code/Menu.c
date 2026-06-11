@@ -40,23 +40,23 @@ void menu(){
 
         switch(input){
             case 1:
-                message_analysis_menu(); //El flujo continua desde Message_Analysis.h
+                //message_analysis_menu(); //El flujo continua desde Message_Analysis.h
                 break;
 
             case 2:
-                message_encryption_menu(); //El flujo continua desde Message_Encryption.h
+                //message_encryption_menu(); //El flujo continua desde Message_Encryption.h
                 break;
 
             case 3:
-                word_inference_menu(); //El flujo continua desde Word_Inference.h
+                //word_inference_menu(); //El flujo continua desde Word_Inference.h
                 break;
 
             case 4:
-                top_words_menu(); //El flujo continua desde Top_Words.h
+                top_words_menu("Cryptonituv_DB/mensajes_cifrados.txt"); //El flujo continua desde Top_Words.h
                 break;
 
             case 5:
-                word_message_analysis_menu(); //El flujo continua desde Word_Message_Analysis.h
+                //word_message_analysis_menu(); //El flujo continua desde Word_Message_Analysis.h
                 break;
 
             case 0:
