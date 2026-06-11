@@ -38,20 +38,20 @@ El sistema está compuesto por 5 módulos principales enfocados en el análisis,
 ## Organización de archivos
 Source_Code/
 │
-├── Message_Analysis.h        # Módulo 1: Ordenamiento y listado de mensajes
-├── Message_Encryption.h      # Módulo 2: Cifrado y descifrado por sustitución
-├── Word_Inference.h          # Módulo 3: Análisis de frecuencias e inferencia de palabras
-├── Top_Words.h               # Módulo 4: Top 10 palabras en mensajes distintos
-├── Word_Message_Analysis.h   # Módulo 5: Búsqueda de palabras y equivalencias cifradas
-├── Menu.c                    # Función main, flujo del menú y llamadas a módulos
+├── Message_Analysis.h              # Módulo 1: Ordenamiento y listado de mensajes
+├── Message_Encryption.h            # Módulo 2: Cifrado y descifrado por sustitución
+├── Word_Inference.h                # Módulo 3: Análisis de frecuencias e inferencia de palabras
+├── Top_Words.h                     # Módulo 4: Top 10 palabras en mensajes distintos
+├── Word_Message_Analysis.h         # Módulo 5: Búsqueda de palabras y equivalencias cifradas
+├── Menu.c                          # Función main, flujo del menú y llamadas a módulos
 │
-└── Cryptonituv_DB/           # Carpeta de base de datos del sistema
-    ├── claves.txt            # Tablas de sustitución para cifrado/descifrado
-    ├── frecuencias.txt       # Datos de frecuencias de letras
-    ├── mensajes.txt          # Mensajes en texto plano
-    ├── mensajes_cifrados.txt # Mensajes codificados para análisis
-    ├── palabras_frecuentes.txt # Diccionario de palabras objetivo descifradas
-    └── remitentes.txt        # Identificadores y nombres de los remitentes
+└── Cryptonituv_DB/                 # Carpeta de base de datos del sistema
+    ├── claves.txt                  # Tablas de sustitución para cifrado/descifrado
+    ├── frecuencias.txt             # Datos de frecuencias de letras
+    ├── mensajes.txt                # Mensajes en texto plano
+    ├── mensajes_cifrados.txt       # Mensajes codificados para análisis
+    ├── palabras_frecuentes.txt     # Diccionario de palabras objetivo descifradas
+    └── remitentes.txt              # Identificadores y nombres de los remitentes
 
 ## Instrucciones de compilación
 Para clonar el repositorio y compilar el proyecto utilizando GCC, ejecute los siguientes comandos en la terminal:
