@@ -40,11 +40,24 @@ int extraer_txt();
 //Imprimir todos los registros obtenidos en el arreglo de structs.
 void imprimir_registros(int n);
 
-//Ordena en orden ASC los mensajes basado en las fechas  formato ISO: AAAA-MM-DD.
+//Ordena en ASC los mensajes basado en las fechas  formato ISO: AAAA-MM-DD.
 //Aplica strcmp para obtener directamente el valor lexicografico.
 //Complejidad: O(n*log(n)). Requiere generar memoria de manera dinamica.
 void merge_sort(struct mensaje *arr, int izq, int der);
 void merge(struct mensaje *arr, int izq, int mid, int der);
+
+//Ordena en ASC los mensajes badaso en el nombre del remitente.
+//Aplica strcmp para obtener directamente el valor lexicografico.
+//Complejidad: O(n*log(n)) para caso promedio. En peor caso puede ser O(n^2).
+void quick_sort(struct mensaje *arr, int izq, int der);
+int partition(struct mensaje *arr, int izq, int der); //Aplica partición Hoare.
+
+//Ordena en DESC los mensajes basado en la longitud del mensaje cifrado.
+//Aplica strlen para obtener directamente el número de caracteres de la cadena.
+//Complejidad: O(2n*log(n)).
+void heap_sort(struct mensaje *arr, int size);
+void push(struct mensaje *h, int *n, struct mensaje dato);
+struct mensaje pop(struct mensaje *h, int *n);
 
 //Para copiar el indice de un arreglo de structs en otro.
 void copy(struct mensaje *dst, struct mensaje *src);
@@ -83,11 +96,13 @@ void message_analysis_menu(){
                 break;
 
             case 3:
+                quick_sort(mensajes, 0, num_registros - 1); //Ordenar por remitente ASC.
                 printf("\n--- LISTADO EN REMITENTE ORDEN ASC ---\n");
                 imprimir_registros(num_registros);
                 break;
 
             case 4:
+                heap_sort(mensajes, num_registros); //Ordenar por longitud del mensaje ASC.
                 printf("\n--- LISTADO EN LONGITUD MENSAJE ORDEN ASC ---\n");
                 imprimir_registros(num_registros);
                 break;
@@ -232,6 +247,108 @@ void merge(struct mensaje *arr, int izq, int mid, int der){
         copy(&arr[izq_aux], &aux[i]); //Vaciamos aux ordenado en el subarreglo mezclado.
     }
     free(aux);
+}
+
+void quick_sort(struct mensaje *arr, int izq, int der){
+    if(izq>=der){
+        return;
+    }
+        
+    int p = partition(arr, izq, der); //Aplica partición Hoare.
+    quick_sort(arr, izq, p - 1); //Subarreglo izquierdo.
+    quick_sort(arr, p + 1, der); //Subarreglo derecho.
+}
+
+int partition(struct mensaje *arr, int izq, int der){
+    int i = izq, j = der-1; //Para iterar en ambos sentidos.
+    struct mensaje *pivote = &arr[der]; //último
+    
+    //strcmp(cad1, cad2): devuelve 0 si cad1 == cad2, negativo si cad1 < cad2, positivo si cad1 > cad2.
+    while(i <= j){
+        while(strcmp(arr[i].remitente, pivote->remitente) < 0){ //aqui no hay que poner i <=right, porque la condicion se rompe al compararse con el pivote
+            i++; //Encontramos el indice del primer elemento mayor a pivote.
+        }
+        while(j>=izq && strcmp(arr[j].remitente, pivote->remitente) > 0){
+            j--; //Encontramos el indice del primer elemento menor a pivote.
+        }
+        if(i <= j){        
+            swap(&arr[i], &arr[j]); //Ambos se ordenan con respecto al pivote: menor -> subarreglo izquierdo, mayor -> derecho.
+            i++; 
+            j--;
+        }
+    }
+    
+    swap(&arr[j + 1], &arr[der]); //Colocamos el pivote en el limite de los subarreglos.
+    return j+1; //Retornamos el indice del pivote.
+}
+
+void heap_sort(struct mensaje *arr, int size){
+    struct mensaje *aux = (struct mensaje*)malloc(sizeof(struct mensaje)*size);
+    int n = 0;
+
+    for(int i=0; i<size; i++){
+        push(aux, &n, arr[i]);
+    }
+  
+    for(int i=0; i<size; i++){ 
+        struct mensaje out = pop(aux, &n); 
+        copy(&arr[i], &out);  
+    }
+
+    free(aux);
+}
+
+void push(struct mensaje *h, int *n, struct mensaje dato){
+    //Insertar al final del arreglo.
+    int i = *n;
+    h[i] = dato;
+    *n = *n + 1; //Incrementamos el contador de elementos.
+  
+    //Flotar
+    while(i > 0) {
+        int padre = (i - 1) / 2;  
+        //Comparamos usando la longitud del mensaje con strlen.
+        //Si el hijo (i) es menor alfabéticamente que el padre, flotamos.
+        if(strlen(h[i].texto_cifrado) < strlen(h[padre].texto_cifrado)){
+            swap(&h[i], &h[padre]);
+            i = padre; //Evaluamos desde la nueva posición.
+        } 
+        else{
+            break; //Si ya es mayor o igual, terminó de flotar.
+        }    
+    } 
+}
+
+struct mensaje pop(struct mensaje *h, int *n){
+    //Es la raiz a retornar.
+    struct mensaje temp = h[0];
+    
+    //Hacer que el último elemento sea el primero.
+    *n = *n - 1;
+    h[0] = h[*n]; 
+  
+    //Hundirlo.
+    int i = 0;
+    while (2 * i + 1 < *n) {
+        int hijo_izq = 2 * i + 1;
+        int hijo_der = 2 * i + 2;
+        int hMenor = hijo_izq;
+
+        //Si el hijo derecho existe y es menor que el izquierdo, actualizamos hMenor.
+        if(hijo_der < *n && strlen(h[hijo_der].texto_cifrado) < strlen(h[hijo_izq].texto_cifrado)){
+            hMenor = hijo_der;
+        }
+        
+        //Si el padre es mayor que el menor de los hijos, lo hundimos.
+        if(strlen(h[i].texto_cifrado) > strlen(h[hMenor].texto_cifrado)){
+            swap(&h[i], &h[hMenor]);
+            i = hMenor; //Ahora el padre baja a la posición del hijo.
+        } 
+        else{
+            break; //Ya encontró su lugar correcto.
+        }
+    }
+    return temp;
 }
 
 void copy(struct mensaje *dst, struct mensaje *src){
