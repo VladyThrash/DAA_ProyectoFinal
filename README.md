@@ -47,12 +47,12 @@ Source_Code/
 ├── Menu.c                          # Función main, flujo del menú y llamadas a módulos
 │
 └── Cryptonituv_DB/                 # Carpeta de base de datos del sistema
-    ├── claves.txt                  # Tablas de sustitución para cifrado/descifrado
-    ├── frecuencias.txt             # Datos de frecuencias de letras
-    ├── mensajes.txt                # Mensajes en texto plano
-    ├── mensajes_cifrados.txt       # Mensajes codificados para análisis
-    ├── palabras_frecuentes.txt     # Diccionario de palabras objetivo descifradas
-    └── remitentes.txt              # Identificadores y nombres de los remitentes
+    ├── claves.txt                
+    ├── frecuencias.txt            
+    ├── mensajes.txt               
+    ├── mensajes_cifrados.txt      
+    ├── palabras_frecuentes.txt    
+    └── remitentes.txt             
 ```
 
 ## Instrucciones de compilación
