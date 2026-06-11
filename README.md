@@ -36,6 +36,7 @@ El sistema está compuesto por 5 módulos principales enfocados en el análisis,
    * **Nota:** Muestra tanto las apariciones cifradas como las no cifradas.
 
 ## Organización de archivos
+```text
 Source_Code/
 │
 ├── Message_Analysis.h              # Módulo 1: Ordenamiento y listado de mensajes
@@ -52,6 +53,7 @@ Source_Code/
     ├── mensajes_cifrados.txt       # Mensajes codificados para análisis
     ├── palabras_frecuentes.txt     # Diccionario de palabras objetivo descifradas
     └── remitentes.txt              # Identificadores y nombres de los remitentes
+```
 
 ## Instrucciones de compilación
 Para clonar el repositorio y compilar el proyecto utilizando GCC, ejecute los siguientes comandos en la terminal:
