@@ -11,6 +11,7 @@
 #include "Word_Inference.h"
 #include "Top_Words.h"
 #include "Word_Message_Analysis.h"
+#include "Leer_Numero.h" //Es solo una función de lectura segura de números enteros.
 
 //Contiene el switch case que dirije el flujo del programa al módulo especifico.
 void menu();
