@@ -56,7 +56,7 @@ void menu(){
                 break;
 
             case 5:
-                //word_message_analysis_menu(); //El flujo continua desde Word_Message_Analysis.h
+                word_message_analysis_menu("Cryptonituv_DB/mensajes_cifrados.txt"); //El flujo continua desde Word_Message_Analysis.h
                 break;
 
             case 0:

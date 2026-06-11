@@ -9,7 +9,8 @@ Módulo 4:
 #ifndef TOP_WORDS_H
 #define TOP_WORDS_H
 
-typedef struct {
+typedef struct 
+{
     char palabra[50];
     int conteo;
 } EntradaPalabra;
@@ -19,6 +20,11 @@ void agregar_o_actualizar(EntradaPalabra global[], int *total_global, char *pala
 void intercambiar(EntradaPalabra *a, EntradaPalabra *b);
 void quicksort(EntradaPalabra arr[], int inicio, int fin);
 void top_words_menu(const char *ruta_archivo);
+
+// Función principal para el módulo 4, que lee el archivo de mensajes cifrados, 
+// extrae las palabras de cada mensaje, y cuenta en cuántos mensajes distintos 
+// aparece cada palabra. Luego ordena las palabras por su conteo y 
+// muestra las 10 más frecuentes.
 
 void top_words_menu(const char *ruta_archivo)
 {
@@ -32,48 +38,62 @@ void top_words_menu(const char *ruta_archivo)
 
     archivo = fopen(ruta_archivo, "r"); // "r" = solo lectura
 
-    if (archivo == NULL) {
+    if (archivo == NULL) 
+    {
         printf("No se pudo abrir el archivo\n");
         return;
     }
 
     fgets(linea, sizeof(linea), archivo); // salta el encabezado
 
-    while (fgets(linea, sizeof(linea), archivo) != NULL) {
+    // Aqui lo que hacemos es leer cada línea del archivo, 
+    //extraer el campo de palabras (campo 5), y luego para cada palabra en ese campo,
+    //verificar si ya la contamos para este mensaje. Si no, la agregamos a
+    //palabras_mensaje y luego actualizamos el conteo global usando agregar_o_actualizar.
+    while (fgets(linea, sizeof(linea), archivo) != NULL) 
+    {
         int campo = 0;
-        char *token = strtok(linea, "|\n");
+        char *campo_actual = strtok(linea, "|\n");
         
-        while (token != NULL) {
-            if (campo == 5) {
+        while (campo_actual != NULL) 
+        {
+            if (campo == 5) 
+            {
                 total_mensaje = 0; // resetear para este mensaje
                 
-                char *pal = strtok(token, " \n");
-                while (pal != NULL) {
-                    if (buscar_palabra(palabras_mensaje, total_mensaje, pal) == -1) {
-                        strcpy(palabras_mensaje[total_mensaje], pal);
+                char *palabra_actual = strtok(campo_actual, " \n");
+                while (palabra_actual != NULL) 
+                {
+                    if (buscar_palabra(palabras_mensaje, total_mensaje, palabra_actual) == -1) 
+                    {
+                        strcpy(palabras_mensaje[total_mensaje], palabra_actual);
                         total_mensaje++;
-                        agregar_o_actualizar(global, &total_global, pal);
+                        agregar_o_actualizar(global, &total_global, palabra_actual);
                     }
-                    pal = strtok(NULL, " \n");
+                    palabra_actual = strtok(NULL, " \n");
                 }
             }
             campo++;                        
-            token = strtok(NULL, "|\n");   
+            campo_actual = strtok(NULL, "|\n");   
         }
     }
 
     quicksort(global, 0, total_global - 1);
 
     // Mostrar top 10
-    for (int i = 0; i < 10 && i < total_global; i++) {
+    for (int i = 0; i < 10 && i < total_global; i++) 
+    {
         printf("%d. %s -> %d mensajes\n", i+1, global[i].palabra, global[i].conteo);
     }
     fclose(archivo);
     return;
 }
 
-int buscar_palabra(char arreglo[][50], int total, char *palabra) {
-    for (int i = 0; i < total; i++) {
+// Funcion auxiliar para buscar una palabra en un arreglo de palabras
+int buscar_palabra(char arreglo[][50], int total, char *palabra) 
+{
+    for (int i = 0; i < total; i++) 
+    {
         if (strcmp(arreglo[i], palabra) == 0) {
             return i; // la encontró, regresa su posición
         }
@@ -81,10 +101,15 @@ int buscar_palabra(char arreglo[][50], int total, char *palabra) {
     return -1; // no la encontró
 }
 
-void agregar_o_actualizar(EntradaPalabra global[], int *total_global, char *palabra) {
+// Función auxiliar para agregar una palabra al conteo global o actualizar 
+//su conteo si ya existe
+void agregar_o_actualizar(EntradaPalabra global[], int *total_global, char *palabra) 
+{
     // Buscar si ya existe
-    for (int i = 0; i < *total_global; i++) {
-        if (strcmp(global[i].palabra, palabra) == 0) {
+    for (int i = 0; i < *total_global; i++) 
+    {
+        if (strcmp(global[i].palabra, palabra) == 0) 
+        {
             global[i].conteo++;  // ya existe, sumar 1
             return;              // terminar la función
         }
@@ -95,17 +120,24 @@ void agregar_o_actualizar(EntradaPalabra global[], int *total_global, char *pala
     (*total_global)++;
 }
 
-void intercambiar(EntradaPalabra *a, EntradaPalabra *b) {
+// Funciones para ordenar el arreglo global de palabras por su conteo usando quicksort
+void intercambiar(EntradaPalabra *a, EntradaPalabra *b) 
+{
     EntradaPalabra temp = *a;
     *a = *b;
     *b = temp;
 }
 
-void quicksort(EntradaPalabra arr[], int inicio, int fin) {
-    if (inicio < fin) {
+// Ordenar de mayor a menor conteo usando quicksort 
+void quicksort(EntradaPalabra arr[], int inicio, int fin) 
+{
+    if (inicio < fin) 
+    {
         int pivote = inicio;
-        for (int i = inicio + 1; i <= fin; i++) {
-            if (arr[i].conteo > arr[pivote].conteo) {
+        for (int i = inicio + 1; i <= fin; i++) 
+        {
+            if (arr[i].conteo > arr[pivote].conteo) 
+            {
                 pivote++;
                 intercambiar(&arr[i], &arr[pivote]);
             }
