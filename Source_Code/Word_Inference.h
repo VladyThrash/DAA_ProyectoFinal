@@ -9,6 +9,16 @@ Módulo 3:
 #ifndef Word_Inference
 #define Word_Inference
 
-//Code section ...
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+
+//Toma el control del flujo del programa desde main.
+void word_inference_menu();
+
+
+void word_inference_menu(){
+    return;
+}
 
 #endif

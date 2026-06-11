@@ -8,6 +8,16 @@ Módulo 2:
 #ifndef Message_Encryption
 #define Message_Encryption
 
-//Code section ...
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+
+//Toma el control del flujo del programa desde main.
+void message_encryption_menu();
+
+
+void message_encryption_menu(){
+    return;
+}
 
 #endif

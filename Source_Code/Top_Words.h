@@ -11,4 +11,12 @@ Módulo 4:
 
 //Code section ...
 
+//Toma el control del flujo del programa desde main.
+void top_words_menu();
+
+
+void top_words_menu(){
+    return;
+}
+
 #endif

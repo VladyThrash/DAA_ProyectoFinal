@@ -13,4 +13,12 @@ Módulo 1:
 #include<stdio.h>
 #include<string.h>
 
+//Toma el control del flujo del programa desde main.
+void message_analysis_menu();
+
+
+void message_analysis_menu(){
+	return;
+}
+
 #endif

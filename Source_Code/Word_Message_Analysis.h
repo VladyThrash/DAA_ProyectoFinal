@@ -11,4 +11,12 @@ Módulo 5:
 
 //Code section ...
 
+//Toma el control del flujo del programa desde main.
+void word_message_analysis_menu();
+
+
+void word_message_analysis_menu(){
+    return;
+}
+
 #endif
