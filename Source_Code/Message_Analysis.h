@@ -9,6 +9,8 @@ Módulo 1:
 #ifndef Message_Analysis
 #define Message_Analysis
 
-//Code section ...
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
 
 #endif
