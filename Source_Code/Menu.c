@@ -52,11 +52,11 @@ void menu(){
                 break;
 
             case 4:
-                top_words_menu(); //El flujo continua desde Top_Words.h
+                top_words_menu("Cryptonituv_DB/mensajes_cifrados.txt"); //El flujo continua desde Top_Words.h
                 break;
 
             case 5:
-                word_message_analysis_menu(); //El flujo continua desde Word_Message_Analysis.h
+                word_message_analysis_menu("Cryptonituv_DB/mensajes_cifrados.txt"); //El flujo continua desde Word_Message_Analysis.h
                 break;
 
             case 0:
