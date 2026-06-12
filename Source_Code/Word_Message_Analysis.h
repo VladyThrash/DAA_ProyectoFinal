@@ -161,12 +161,4 @@ void word_message_analysis_menu(const char *ruta_archivo)
     fclose(archivo);
 }
 
-//Toma el control del flujo del programa desde main.
-void word_message_analysis_menu();
-
-
-void word_message_analysis_menu(){
-    return;
-}
-
 #endif
