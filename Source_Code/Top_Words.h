@@ -133,18 +133,22 @@ void quicksort(EntradaPalabra arr[], int inicio, int fin)
 {
     if (inicio < fin) 
     {
-        int pivote = inicio;
-        for (int i = inicio + 1; i <= fin; i++) 
+        int pivote = fin;  // ← cambia inicio por fin
+        int i = inicio - 1;
+        
+        for (int j = inicio; j < fin; j++) 
         {
-            if (arr[i].conteo > arr[pivote].conteo) 
+            if (arr[j].conteo > arr[pivote].conteo) 
             {
-                pivote++;
-                intercambiar(&arr[i], &arr[pivote]);
+                i++;
+                intercambiar(&arr[i], &arr[j]);
             }
         }
-        intercambiar(&arr[inicio], &arr[pivote]);
-        quicksort(arr, inicio, pivote - 1);
-        quicksort(arr, pivote + 1, fin);
+        intercambiar(&arr[i + 1], &arr[fin]);
+        int pos_pivote = i + 1;
+        
+        quicksort(arr, inicio, pos_pivote - 1);
+        quicksort(arr, pos_pivote + 1, fin);
     }
 }
 
