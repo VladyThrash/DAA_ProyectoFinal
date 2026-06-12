@@ -74,9 +74,6 @@ void imprimir_claves(int n);
 //Para copiar la información de un struct men en otro.
 void copy_mensaje(struct men *dst, struct men *src);
 
-//Para hacer swap entre dos struc mensaje.
-void swap_mensaje(struct men *msg1, struct men *msg2);
-
 
 void message_encryption_menu(){
     int num_mens = extraer_mens_txt(); //Leemos los mens desde el txt.
@@ -440,34 +437,4 @@ void copy_mensaje(struct men *dst, struct men *src){
     strcpy(dst->texto_cifrado, src->texto_cifrado);
 }
 
-void swap_mensaje(struct men *msg1, struct men *msg2){
-    struct men aux;
-
-    //Copiamos contenido de msg1 a aux.
-    strcpy(aux.id, msg1->id);
-    strcpy(aux.remitente, msg1->remitente);
-    strcpy(aux.prioridad, msg1->prioridad);
-    strcpy(aux.fecha, msg1->fecha);
-    strcpy(aux.clave_id, msg1->clave_id);
-    strcpy(aux.texto_original, msg1->texto_original);
-    strcpy(aux.texto_cifrado, msg1->texto_cifrado);
-
-    //Copiamos contenido de msg2 a msg1.
-    strcpy(msg1->id, msg2->id);
-    strcpy(msg1->remitente, msg2->remitente);
-    strcpy(msg1->prioridad, msg2->prioridad);
-    strcpy(msg1->fecha, msg2->fecha);
-    strcpy(msg1->clave_id, msg2->clave_id);
-    strcpy(msg1->texto_original, msg2->texto_original);
-    strcpy(msg1->texto_cifrado, msg2->texto_cifrado);
-
-    //Copiamos contenido de aux a msg2.
-    strcpy(msg2->id, aux.id);
-    strcpy(msg2->remitente, aux.remitente);
-    strcpy(msg2->prioridad, aux.prioridad);
-    strcpy(msg2->fecha, aux.fecha);
-    strcpy(msg2->clave_id, aux.clave_id);
-    strcpy(msg2->texto_original, aux.texto_original);
-    strcpy(msg2->texto_cifrado, aux.texto_cifrado);
-}
 #endif
