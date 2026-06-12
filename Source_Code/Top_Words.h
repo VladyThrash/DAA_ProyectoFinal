@@ -152,12 +152,4 @@ void quicksort(EntradaPalabra arr[], int inicio, int fin)
     }
 }
 
-//Toma el control del flujo del programa desde main.
-void top_words_menu();
-
-
-void top_words_menu(){
-    return;
-}
-
 #endif
