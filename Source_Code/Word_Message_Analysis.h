@@ -42,18 +42,14 @@ void cifrar_palabra(char *palabra, char *alfabeto, char *sustitucion, char *resu
     resultado[strlen(palabra)] = '\0';
 }
 
-
-// Funcion principal para el módulo 5, que lee el archivo de mensajes cifrados,
-// busca una palabra ingresada por el usuario, y muestra en qué mensajes aparece
-// mediante el texto original y también cifrada usando cada una de las claves disponibles.
-// Con ayuda de los 2 while anidados, lo que hacemos es leer cada línea del archivo,
-// extraer el id del mensaje y luego verificar el campo de texto original (campo 5)
-// y el campo de texto cifrado (campo 6) para ver si contienen la palabra buscada 
-// o su versión cifrada. Si la palabra se encuentra en el texto original, 
-// se muestra un mensaje indicando que se encontró en ese mensaje. 
-// Si se encuentra en el texto cifrado, se muestra un mensaje 
-// indicando que se encontró cifrada con la clave correspondiente. 
-// Al final, se muestra el total de apariciones encontradas.
+// Función para mostrar las apariciones y equivalencias de una palabra dada un archivo de mensajes cifrados.
+// Esto lo que hace es leer el archivo línea por línea, extraer el id del mensaje, 
+// y luego verificar el campo de texto original y el campo de texto cifrado para ver 
+// si contienen la palabra buscada o su versión cifrada. Si la palabra se encuentra en el 
+// texto original, se muestra un mensaje indicando que se encontró en ese mensaje. 
+// Si se encuentra en el texto cifrado, se muestra un mensaje indicando que se encontró 
+// cifrada con la clave correspondiente. Al final, se muestra el total de apariciones 
+// encontradas.
 void leer_claves(Clave claves[], int *total_claves) 
 {
     FILE *archivo = fopen("Cryptonituv_DB/claves.txt", "r");
@@ -83,14 +79,17 @@ void leer_claves(Clave claves[], int *total_claves)
     fclose(archivo);
 }
 
-// Función para mostrar las apariciones y equivalencias de una palabra dada un archivo de mensajes cifrados.
-// Esto lo que hace es leer el archivo línea por línea, extraer el id del mensaje, 
-// y luego verificar el campo de texto original y el campo de texto cifrado para ver 
-// si contienen la palabra buscada o su versión cifrada. Si la palabra se encuentra en el 
-// texto original, se muestra un mensaje indicando que se encontró en ese mensaje. 
-// Si se encuentra en el texto cifrado, se muestra un mensaje indicando que se encontró 
-// cifrada con la clave correspondiente. Al final, se muestra el total de apariciones 
-// encontradas.
+// Funcion principal para el módulo 5, que lee el archivo de mensajes cifrados,
+// busca una palabra ingresada por el usuario, y muestra en qué mensajes aparece
+// mediante el texto original y también cifrada usando cada una de las claves disponibles.
+// Con ayuda de los 2 while anidados, lo que hacemos es leer cada línea del archivo,
+// extraer el id del mensaje y luego verificar el campo de texto original (campo 5)
+// y el campo de texto cifrado (campo 6) para ver si contienen la palabra buscada 
+// o su versión cifrada. Si la palabra se encuentra en el texto original, 
+// se muestra un mensaje indicando que se encontró en ese mensaje. 
+// Si se encuentra en el texto cifrado, se muestra un mensaje 
+// indicando que se encontró cifrada con la clave correspondiente. 
+// Al final, se muestra el total de apariciones encontradas.
 void word_message_analysis_menu(const char *ruta_archivo)
 {
     FILE *archivo;
