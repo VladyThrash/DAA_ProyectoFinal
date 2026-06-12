@@ -77,8 +77,8 @@ void copy_mensaje(struct men *dst, struct men *src);
 
 void message_encryption_menu(){
     int num_mens = extraer_mens_txt(); //Leemos los mens desde el txt.
-    int num_claves = extraer_claves_txt(); //Leemos las ckaves desde el txt.
-    printf("%d\n", num_claves);
+    int num_claves = extraer_claves_txt(); //Leemos las claves desde el txt.
+    
     if(num_mens == 0 || num_claves == 0){ //Validar que se extrajo la información de los archivos txt.
         return;
     }
